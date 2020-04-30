@@ -2,18 +2,38 @@
   <form>
     <div class="form-group">
       <label for="exampleInputEmail1">ID</label>
-      <input type="text" class="form-control" id="exampleInputID" aria-describedby="emailHelp" placeholder="ID">        
+      <input type="text" class="form-control" id="exampleInputID" placeholder="ID" #idinput>        
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Название</label>
-      <input type="text" class="form-control" id="exampleInputName1" placeholder="Название">
+      <input type="text" class="form-control" id="exampleInputName1" placeholder="Название" #nameinput>
     </div>
     <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" #indicinput>
       <label class="form-check-label" for="exampleCheck1">Онлайн</label>
     </div>
-    <button type="button" class="btn btn-primary" (click)="addIndic()">Добавить</button>
+    <button type="button" class="btn btn-primary" (click)="addIndic()" #addcard>Добавить</button>
   </form>
 </div>
 
-<div class='maindiv' id='maind'>{{addIndics()}}</div>
+
+<div class='maindiv' id='maind' >
+  <div *ngFor='let i of cardsholder' class='card' [style.background-color]='i.color' #card>    
+    <div class="card-body">
+      <p class="card-text">ID: {{i.id}}</p>
+      <p class="card-text">Name: {{i.name}}</p>
+      <button type="button" class="btn btn-outline-secondary" (click)="card.remove(); deleteIndic(i.id)">Удалить</button>
+    </div>
+  </div>
+  <div *ngIf='checker; then customtemplate'></div>
+</div>
+
+<ng-template #customtemplate>
+  <div class='card' #customcard>    
+    <div class="card-body" [style.background-color]="nameinput.checked ? '#6ee755':'#f05959'">
+      <p class="card-text">ID: {{idinput.value}}</p>
+      <p class="card-text">Name: {{nameinput.value}}</p>
+      <button type="button" class="btn btn-outline-secondary" (click)="customcard.remove()">Удалить</button>
+    </div>
+  </div>
+</ng-template>

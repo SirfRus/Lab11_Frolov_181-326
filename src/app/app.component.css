@@ -9,3 +9,12 @@
     width: 100%;
     margin: 10px;         
 }
+.card {    
+    width: 18rem;          
+    margin: 1.5em;            
+    float: left;
+}
+button {
+    border: 1.5px solid black; 
+    color: black;
+}
